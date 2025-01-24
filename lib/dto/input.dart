@@ -7,6 +7,7 @@ enum Input {
   keyRight,
   keyA,
   key1,
-  key2
-
+  key2,
+  sensorData,
+  vibrate
 }
