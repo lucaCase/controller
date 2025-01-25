@@ -8,6 +8,4 @@ enum Input {
   keyA,
   key1,
   key2,
-  sensorData,
-  vibrate
 }

@@ -1,13 +1,14 @@
 import 'package:controller/components/control_pad_button.dart';
+import 'package:controller/dto/input_state.dart';
 import 'package:flutter/material.dart';
 
 class ControlPad extends StatelessWidget {
   const ControlPad({super.key, required this.up, required this.down, required this.left, required this.right});
 
-  final VoidCallback up;
-  final VoidCallback down;
-  final VoidCallback left;
-  final VoidCallback right;
+  final ValueChanged<InputState> up;
+  final ValueChanged<InputState> down;
+  final ValueChanged<InputState> left;
+  final ValueChanged<InputState> right;
 
   @override
   Widget build(BuildContext context) {
