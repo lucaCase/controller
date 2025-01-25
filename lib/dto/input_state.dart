@@ -1,1 +1,1 @@
-enum InputState { none, down, up, pressed }
+enum InputState { None, Down, Up, Pressed }

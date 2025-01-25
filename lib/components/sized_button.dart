@@ -19,18 +19,18 @@ class SizedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () {
-        onPressed(InputState.pressed);
+        onPressed(InputState.Pressed);
         wasPressedLong = true;
       },
       child: Listener(
         onPointerUp: (_) {
           if (wasPressedLong) {
-            onPressed(InputState.up);
+            onPressed(InputState.Up);
             wasPressedLong = false;
-            onPressed(InputState.none);
+            onPressed(InputState.None);
           }
         },
-        onPointerDown: (_) => onPressed(InputState.down),
+        onPointerDown: (_) => onPressed(InputState.Down),
         child: Container(
           height: metric,
           width: metric,
