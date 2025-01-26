@@ -1,6 +1,7 @@
 import 'package:controller/pages/about.dart';
 import 'package:controller/pages/controller.dart';
 import 'package:controller/pages/home.dart';
+import 'package:controller/pages/server_connection.dart';
 import 'package:controller/pages/server_selection.dart';
 import 'package:controller/pages/settings.dart';
 import 'package:controller/pages/users_manual.dart';
@@ -21,6 +22,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -29,7 +31,8 @@ class _MyAppState extends State<MyApp> {
       initialRoute: "/home",
       routes: {
         "/home": (context) => const Home(),
-        "/server-selection": (context) => const ServerSelection(),
+        "/server-selection": (context) => ServerSelection(),
+        "/server-connection": (context) => const ServerConnection(),
         "/controller": (context) => const Controller(),
         "/users-manual": (context) => const UsersManual(),
         "/settings": (context) => const Settings(),

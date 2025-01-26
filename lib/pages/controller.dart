@@ -8,7 +8,7 @@ import '../components/game_button.dart';
 import '../components/pause_button.dart';
 import '../dto/input.dart';
 import '../dto/sensor_data.dart';
-import '../dto/value_holder.dart';
+import '../dto/server.dart';
 import '../services/state_service.dart';
 import 'package:sensors_plus/sensors_plus.dart' as sensors_plus;
 
@@ -32,13 +32,18 @@ class _ControllerState extends State<Controller> {
   double yAcc = 0;
   double zAcc = 0;
 
-  late UdpService udp = UdpService(shouldSendSensorData: (bool value) {
-    shouldSendSensorData = value;
-  });
+  Server? server;
+  late UdpService udpService;
 
   @override
   void initState() {
     super.initState();
+
+    udpService = UdpService((bool value) {
+      setState(() {
+        shouldSendSensorData = value;
+      });
+    });
 
     RotationSensor.orientationStream.listen((event) {
       roll = event.eulerAngles.roll;
@@ -55,14 +60,16 @@ class _ControllerState extends State<Controller> {
     Timer.periodic(const Duration(milliseconds: 50), (timer) async {
       if (shouldSendSensorData) {
         UdpService.sendSensorData(
-            SensorData(roll, pitch, yaw, xAcc, yAcc, zAcc));
+            SensorData(roll, pitch, yaw, xAcc, yAcc, zAcc), server!.ip, server!.port);
       }
     });
-  }
 
+  }
 
   @override
   Widget build(BuildContext context) {
+    server = server ?? ModalRoute.of(context)!.settings.arguments as Server;
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -76,13 +83,21 @@ class _ControllerState extends State<Controller> {
                   children: [
                     PauseButton(
                       onPressed: (state) {
-                        print(StateService.getStatesAsMap(
-                            Input.InputMinus, state));
+                        udpService.send(
+                            StateService.getStatesAsMap(
+                                Input.InputMinus, state),
+                            server!.ip,
+                            server!.port);
                       },
                       text: '-',
                     ),
                     PauseButton(
-                      onPressed: (state) {},
+                      onPressed: (state) {
+                        udpService.send(
+                            StateService.getStatesAsMap(Input.InputPlus, state),
+                            server!.ip,
+                            server!.port);
+                      },
                       text: '+',
                     ),
                   ],
@@ -92,18 +107,28 @@ class _ControllerState extends State<Controller> {
                 offset: const Offset(0, -75),
                 child: ControlPad(
                   up: (state) {
-                    print(StateService.getStatesAsMap(Input.InputUp, state));
+                    udpService.send(
+                        StateService.getStatesAsMap(Input.InputUp, state),
+                        server!.ip,
+                        server!.port);
                   },
                   down: (state) {
-                    print(StateService.getStatesAsMap(Input.InputDown, state));
+                    udpService.send(
+                        StateService.getStatesAsMap(Input.InputDown, state),
+                        server!.ip,
+                        server!.port);
                   },
                   left: (state) {
-                    print(StateService.getStatesAsMap(Input.InputLeft, state));
-
+                    udpService.send(
+                        StateService.getStatesAsMap(Input.InputLeft, state),
+                        server!.ip,
+                        server!.port);
                   },
                   right: (state) {
-                    print(StateService.getStatesAsMap(Input.InputRight, state));
-
+                    udpService.send(
+                        StateService.getStatesAsMap(Input.InputRight, state),
+                        server!.ip,
+                        server!.port);
                   },
                 ),
               ),
@@ -111,11 +136,10 @@ class _ControllerState extends State<Controller> {
                 offset: const Offset(0, -75),
                 child: GameButton(
                   onPressed: (state) async {
-                    ValueHolder sensorData = await udp.send(Input.InputA);
-
-                    setState(() {
-                      sensorData.execute();
-                    });
+                    udpService.send(
+                        StateService.getStatesAsMap(Input.InputA, state),
+                        server!.ip,
+                        server!.port);
                   },
                   text: 'A',
                 ),
@@ -129,7 +153,10 @@ class _ControllerState extends State<Controller> {
                     children: [
                       GameButton(
                         onPressed: (state) {
-                          print(StateService.getStatesAsMap(Input.Input1, state));
+                          udpService.send(
+                              StateService.getStatesAsMap(Input.Input1, state),
+                              server!.ip,
+                              server!.port);
                         },
                         text: '1',
                       ),
@@ -138,7 +165,10 @@ class _ControllerState extends State<Controller> {
                       ),
                       GameButton(
                         onPressed: (state) {
-                          print(StateService.getStatesAsMap(Input.Input2, state));
+                          udpService.send(
+                              StateService.getStatesAsMap(Input.Input2, state),
+                              server!.ip,
+                              server!.port);
                         },
                         text: '2',
                       ),

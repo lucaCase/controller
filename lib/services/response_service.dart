@@ -5,7 +5,6 @@ import 'package:vibration/vibration.dart';
 class ResponseService {
   ValueChanged<bool> shouldSendSensorData;
 
-
   ResponseService(this.shouldSendSensorData);
 
   ValueHolder getValueHolderFromString(String valueHolder) {
@@ -18,7 +17,7 @@ class ResponseService {
   }
 
   Function fromString(String str, String value) {
-    print(str);
+    print(str == "StartSendSensorData");
     switch(str) {
       case "Vibrate":
         return () {

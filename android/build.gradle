@@ -28,3 +28,21 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
+/*
+buildTypes {
+    release {
+        profile {
+            matchingFallbacks = ['debug', 'release']
+        }
+        minifyEnabled true
+        useProguard true
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        signingConfig signingConfigs.release
+    }
+}
+lintOptions {
+    disable 'InvalidPackage'
+    checkReleaseBuilds false
+}
+
+ */

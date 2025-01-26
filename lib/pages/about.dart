@@ -5,6 +5,10 @@ class About extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Center(
+        child: TextButton(onPressed: () {}, child: const Text("DES IS A TEST")),
+      ),
+    );
   }
 }

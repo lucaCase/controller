@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Luca",
+    "ip": "192.168.0.26",
+    "port": 11000,
+    "lastUpdate": "2021-06-01T12:00:00",
+    "games": [
+      {
+        "id": "721h8danbs",
+        "title": "WarioWare: Smooth Moves",
+        "description": "WarioWare: Smooth Moves is a party video game developed by Nintendo for the Wii console. It is the fifth installment in the WarioWare series of games, and the only installment for the Wii. The game was released in Japan in December 2006, and in Europe, North America, and Australia in January 2007. It was also released for the Wii U's Virtual Console in Japan on October 18, 2017, in Europe on December 14, 2017, and in North America on December 21, 2017.",
+        "image": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c9/WarioWare_Smooth_Moves_NA_Cover.jpg/220px-WarioWare_Smooth_Moves_NA_Cover.jpg"
+      },
+      {
+        "id": "ds9ha8nd98",
+        "title": "Super Mario Galaxy",
+        "description": "Super Mario Galaxy is a 2007 platform game for the Wii, and the third 3D game in Nintendo's Super Mario series. As Mario or Luigi, the player embarks on a quest to rescue Princess Peach, save the universe from Bowser, and collect 121 Power Stars. The levels in the game consist of galaxies filled with minor planets and worlds, with different variations of gravity, the central element of gameplay.",
+        "image": "https://upload.wikimedia.org/wikipedia/en/7/76/SuperMarioGalaxy.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Amstetten",
+    "ip": "192.168.0.220",
+    "port": 11000,
+    "games": []
+  }
+]
